@@ -1,0 +1,206 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: linear-gradient(135deg, #f5eeff, #fff0f8, #eef5ff);
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
+}
+
+#vue-accueil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem;
+  height: 100vh;
+}
+
+#vue-corps, #vue-visage {
+  display: none;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.panneau {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 38vw;
+  height: 100vh;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 10;
+  border-right: 2px solid #f5d0e8;
+}
+
+.categories {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  padding: 0.375rem;
+  border-bottom: 2px solid #f5d0e8;
+}
+
+.cat-btn {
+  padding: 0.2rem 0.3rem;
+  font-size: 0.6rem;
+  border-radius: 0.625rem;
+  border: 1px solid #e8c0d8;
+  background: white;
+  color: #b088c0;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+}
+
+.cat-btn.actif {
+  background: linear-gradient(135deg, #d4548a, #9b59b6);
+  color: white;
+  border-color: transparent;
+}
+
+/* ← UN SEUL ITEM EN GRAND */
+.grille {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.vignette {
+  width: 100%;
+  min-height: 8rem;
+  background: #fdf0f8;
+  border: 2px solid transparent;
+  border-radius: 0.625rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.vignette.selectionne { border-color: #e99fbe; background: #fff0f8; }
+.vignette img { width: 5rem; height: auto; object-fit: contain; }
+
+#zone-mannequin {
+  position: fixed;
+  left: 38vw;
+  top: 0;
+  width: 38vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+#mannequin-corps {
+  width: 100%;
+  height: auto;
+}
+
+.calque-vetement, .calque-derriere {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+.lookbook {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 24vw;
+  height: 100vh;
+  background: rgba(255,255,255,0.9);
+  border-left: 2px solid #f5d0e8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.375rem;
+  z-index: 10;
+}
+
+.lookbook-mini {
+  width: 3.75rem;
+  height: 6.25rem;
+  position: relative;
+}
+
+.lookbook-mini img {
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: auto;
+}
+
+.lookbook-titre {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  color: #d4548a;
+  font-weight: 600;
+  text-align: center;
+}
+
+.lookbook-nom {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  color: #9b59b6;
+  text-align: center;
+  font-weight: 800;
+}
+
+.lookbook-fleche {
+  background: linear-gradient(135deg, #d4548a, #9b59b6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selecteur-peau {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.25rem 0.375rem;
+  border-bottom: 2px solid #f5d0e8;
+  justify-content: center;
+}
+
+.cercle-peau {
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.cercle-peau.actif { border-color: #d4548a; }
+
+.btn-switch {
+  padding: 0.3rem 0.625rem;
+  background: linear-gradient(135deg, #d4548a, #9b59b6);
+  color: white;
+  border: none;
+  border-radius: 1.25rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+}

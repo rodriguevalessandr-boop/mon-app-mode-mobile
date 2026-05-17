@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mon app Mode mobile !</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montez&family=Nunito:wght@400;800&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style-mobile.css">
+<script src="script.js"></script>
+<link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+<!-- VUE ACCUEIL -->
+<div id="vue-accueil">
+  <h1>Mon Fashion Studio </h1>
+
+  <button class="btn-switch" onclick="ouvrirBestiaire()" style="margin: top 5rem;">🐾 Bestiaire Fantastique</button>
+
+  <div class="scene">
+    <div class="mannequin-carte" onclick="ouvrirCorps()">
+      <img src="mannequin-corps.png" alt="corps">
+      <p>👗 Corps</p>
+    </div>
+    <div class="mannequin-carte" onclick="ouvrirVisage()">
+      <img src="mannequin-visage.png" alt="visage">
+      <p>💄 Visage</p>
+    </div>
+  </div>
+
+  <div class="bouches-decor">
+    <img src="bouche-roxane.png" class="bouche-decor" data-nom="Roxane">
+    <img src="bouche-ondine.png" class="bouche-decor" data-nom="Ondine">
+    <img src="bouche-jasmine.png" class="bouche-decor" data-nom="Jasmine">
+    <img src="bouche-vanadis.png" class="bouche-decor" data-nom="Vanadis">
+    <img src="bouche-bellone.png" class="bouche-decor" data-nom="Bellone">
+    <img src="bouche-valkyrie.png" class="bouche-decor" data-nom="Valkyrie">
+    <img src="bouche-iris.png" class="bouche-decor" data-nom="Iris">
+  </div>
+
+</div>
+<!-- VUE CORPS -->
+<div id="vue-corps">
+
+<img id="calque-bestiaire" src="" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; z-index:4; pointer-events:none;">
+
+  <!-- Lookbook corps -->
+  <div class="lookbook" id="lookbook-corps" style="right: 220px;">
+    <p class="lookbook-titre">✨ Lookbook</p>
+    <div class="lookbook-carrousel">
+      <button class="lookbook-fleche" onclick="lookbookCorpsNav(-1)">▲</button>
+      <div class="lookbook-mini" id="lookbook-corps-mini"></div>
+      <p class="lookbook-nom" id="lookbook-corps-nom">Tenue 1</p>
+      <button class="btn-switch" onclick="lookbookCorpsAppliquer()" style="font-size:11px;padding:5px 10px;">✓ Appliquer</button>
+      <button class="lookbook-fleche" onclick="lookbookCorpsNav(1)">▼</button>
+    </div>
+  </div>
+
+  <span class="titre-vertical">Mon Fashion Studio</span>
+
+  <div id="historique">
+    <p class="titre-historique">Déjà consultés !</p>
+    <div style="display:flex;gap:6px;margin-bottom:8px;">
+      <button onclick="annulerDernier()" class="btn-switch" style="font-size:11px;padding:5px 10px;">↩️ Annuler</button>
+      <button onclick="toutEffacer()" class="btn-switch" style="font-size:11px;padding:5px 10px;">🗑️ Tout effacer</button>
+    </div>
+    <div id="historique-grille"></div>
+  </div>
+
+<div style="position: fixed; left: 60px; top: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 20;">
+  <button class="btn-switch" style="white-space:nowrap;" onclick="retour()">← Accueil</button>
+  <button class="btn-switch" style="white-space:nowrap;" onclick="ouvrirVisage()">💄 Visage</button>
+</div>
+
+  <div id="zone-mannequin">
+    <img id="mannequin-corps" src="mannequin-corps.png" alt="corps">
+  </div>
+
+ <div class="panneau">
+  <div style="width:150px; flex-shrink:0; display:flex; flex-direction:column; border-right:2px solid #f5d0e8; overflow:hidden;">
+    <div style="flex:1; overflow-y:auto; padding:8px 6px; display:flex; flex-direction:column; gap:5px; margin-top:30px;">
+      
+      <button onclick="aupifTenue()" style="font-family:'Montez',cursive; font-size:1.2rem; letter-spacing:3px; padding:20px 12px; background:linear-gradient(135deg,#d4548a,#9b59b6); color:white; border:none; border-radius:25px; cursor:pointer; white-space:nowrap;">
+        ✨ Chance
+      </button>
+<div class="selecteur-peau" id="selecteur-peau">
+    <div class="cercle-peau actif" style="background:#fde8d0" onclick="changerPeau('mannequin-corps.png',this)"></div>
+    <div class="cercle-peau" style="background:#d4956a" onclick="changerPeau('mannequin-caramel.png',this)"></div>
+    <div class="cercle-peau" style="background:#c68642" onclick="changerPeau('mannequin-doree.png',this)"></div>
+    <div class="cercle-peau" style="background:#6b3a2a" onclick="changerPeau('mannequin-chocolat.png',this)"></div>
+    <div class="cercle-peau" style="background:#3d1f0d" onclick="changerPeau('mannequin-noire.png',this)"></div>
+  </div>
+      <div class="categories" id="categories"></div>
+    </div>
+  </div>
+
+  <div style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+    
+    <button class="btn-switch" onclick="aupifCategorie()" style="margin:8px; font-size:11px; padding:5px 10px;">
+      🎲 Au pif !
+    </button>
+    
+    <div class="grille" id="grille"></div>
+  </div>
+</div>
+
+</div>
+
+<!-- VUE VISAGE -->
+<div id="vue-visage">
+
+  <div style="position:absolute;left:220px;top:10px;display:flex;flex-direction:column;gap:10px;z-index:10;">
+    <button class="btn-switch" style="white-space:nowrap;" onclick="retour()">← Accueil</button>
+    <button class="btn-switch" style="white-space:nowrap;" onclick="ouvrirCorps()">👗 Corps</button>
+  </div>
+
+  <!-- Lookbook visage -->
+  <div class="lookbook" id="lookbook-visage" style="left:20px;">
+    <p class="lookbook-titre">✨ Lookbook</p>
+    <div class="lookbook-carrousel">
+      <button class="lookbook-fleche" onclick="lookbookVisageNav(-1)">▲</button>
+      <div class="lookbook-mini" id="lookbook-visage-mini"></div>
+      <p class="lookbook-nom" id="lookbook-visage-nom">Tenue 1</p>
+      <button class="btn-switch" onclick="lookbookVisageAppliquer()" style="font-size:11px;padding:5px 10px;">✓ Appliquer</button>
+      <button class="lookbook-fleche" onclick="lookbookVisageNav(1)">▼</button>
+    </div>
+  </div>
+
+  <span class="titre-vertical">Mon Fashion Studio</span>
+
+  <div class="selecteur-peau selecteur-peau-visage" id="selecteur-peau-visage">
+    <div class="cercle-peau actif" style="background:#fde8d0" onclick="changerPeauVisage('mannequin-visage.png',this)"></div>
+    <div class="cercle-peau" style="background:#d4956a" onclick="changerPeauVisage('mannequin-visage-caramel.png',this)"></div>
+    <div class="cercle-peau" style="background:#c68642" onclick="changerPeauVisage('mannequin-visage-dore.png',this)"></div>
+    <div class="cercle-peau" style="background:#6b3a2a" onclick="changerPeauVisage('mannequin-visage-chocolat.png',this)"></div>
+    <div class="cercle-peau" style="background:#3d1f0d" onclick="changerPeauVisage('mannequin-visage-noir.png',this)"></div>
+  </div>
+
+  <div id="zone-visage"></div>
+
+  <div id="historique-visage">
+  <p class="titre-historique">Déjà consultés !</p>
+  <div style="display:flex;gap:6px;margin-bottom:8px;">
+    <button onclick="annulerDernierVisage()" class="btn-switch" style="font-size:11px;padding:5px 10px;">↩️ Annuler</button>
+    <button onclick="toutEffacerVisage()" class="btn-switch" style="font-size:11px;padding:5px 10px;">🗑️ Tout effacer</button>
+  </div>
+  <div id="historique-visage-grille"></div>
+</div>
+
+ <div class="panneau-visage">
+  <div style="width:150px; flex-shrink:0; display:flex; flex-direction:column; border-left:2px solid #f5d0e8; overflow:hidden;">
+    <div style="flex:1; overflow-y:auto; padding:8px 6px; display:flex; flex-direction:column; gap:5px; margin-top:10px;">
+      
+      <button onclick="aupifVisage()" style="font-family:'Montez',cursive; font-size:1.2rem; letter-spacing:3px; padding:15px 5px; background:linear-gradient(135deg,#d4548a,#9b59b6); color:white; border:none; border-radius:25px; cursor:pointer; width:100%; margin-bottom:10px;">
+        ✨ Chance
+      </button>
+
+      <div class="categories" id="categories-visage"></div>
+    </div>
+  </div>
+
+  <div style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+    
+    <button class="btn-switch" onclick="aupifCategorieVisage()" style="margin:8px; font-size:11px; padding:5px 10px;">
+      🎲 Au pif !
+    </button>
+    
+    <div class="grille" id="grille-visage"></div>
+  </div>
+</div>
+
+  </div>
+</div>
+<div id="modal-bestiaire">
+  <div class="bestiaire-boite">
+    <button class="bestiaire-fermer" onclick="fermerBestiaire()">✕</button>
+    <h2 style="font-family:'Montez',cursive;color:#9b59b6;font-size:1.8rem;">Bestiaire Fantastique</h2>
+    <div class="bestiaire-scene">
+      <div class="icone-cercle actif" id="icone-Animal" style="top:0;left:50%;transform:translate(-50%,-50%)" onclick="selCategBestiaire('Animal','🐾')" title="Animal">🐾</div>
+      <div class="icone-cercle" id="icone-Chapeaux" style="top:15%;right:-10%;transform:translate(50%,-50%)" onclick="selCategBestiaire('Chapeaux','🎩')" title="Chapeaux">🎩</div>
+      <div class="icone-cercle" id="icone-Ornements" style="bottom:15%;right:-10%;transform:translate(50%,50%)" onclick="selCategBestiaire('Ornements','📡')" title="Ornements">📡</div>
+      <div class="icone-cercle" id="icone-Accessoires" style="bottom:0;left:50%;transform:translate(-50%,50%)" onclick="selCategBestiaire('Accessoires','✨')" title="Accessoires">✨</div>
+      <div class="icone-cercle" id="icone-Corps" style="bottom:15%;left:-10%;transform:translate(-50%,50%)" onclick="selCategBestiaire('Corps','🫀')" title="Corps">🫀</div>
+      <div class="icone-cercle" id="icone-Tete" style="top:15%;left:-10%;transform:translate(-50%,-50%)" onclick="selCategBestiaire('Tete','🐱')" title="Tête">🐱</div>
+      <p style="color:#c084fc;font-size:0.9rem;text-align:center;">Bientôt disponible ✨</p>
+    </div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#d4548a;" id="bestiaire-titre-cat">🐾 Animal</p>
+    <div class="bestiaire-grille" id="bestiaire-grille"></div>
+    </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
