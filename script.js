@@ -784,3 +784,37 @@ function construireGrilleBestiaire() {
     grille.appendChild(v);
   });
 }
+// Nouvelle fonction pour gérer l'habillage dynamique du visage
+function mettreAJourCalquesVisage() {
+  // Supprime les anciens calques cosmétiques pour repartir propre
+  document.querySelectorAll('.calque-visage-item').forEach(el => el.remove());
+  
+  const zone = document.getElementById('zone-visage');
+  if (!zone) return;
+
+  // On s'assure que l'image de base du mannequin visage prend la bonne couleur de peau
+  let mannequin = document.getElementById('mannequin-visage');
+  if (mannequin) {
+    mannequin.src = mannequinVisageActuel;
+  }
+
+  // Ordre d'empilement des calques du visage (du plus profond au plus haut)
+  const ordreVisage = [
+    'Iris', 'Rouges à lèvres', 'Blush', 'Eye liners', 
+    'Fards à paupières', 'Cils', 'Boucles d"oreilles', 'Colliers', 'Coiffures'
+  ];
+
+  ordreVisage.forEach(cat => {
+    // Utilise l'aperçu au survol si présent, sinon la sélection enregistrée
+    const fichier = (apercuVisage && cat === categorieVisage) ? apercuVisage : selectionsVisage[cat];
+    if (fichier) {
+      const img = document.createElement('img');
+      img.src = fichier;
+      img.className = 'calque-vetement calque-visage-item'; // Utilise les mêmes règles CSS d'alignement absolu
+      zone.appendChild(img);
+    }
+  });
+
+  // Sauvegarde l'état dans le LocalStorage
+  sauvegarder();
+}
